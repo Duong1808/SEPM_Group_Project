@@ -22,6 +22,9 @@
             </div>
             <div class="create">
                 <label class="btn btn-primary" for="create-post">Create</label>
+                <div class="profile-photo">
+                    <img src="assets/feeds/feeds2.jpg">
+                </div>
             </div>
         </div>
     </nav>
@@ -31,6 +34,17 @@
         <div class="container">
             <!-- Left side -->
             <div class="left">
+                <a class="profile">
+                    <div class="profile-photo">
+                        <img src="assets/feeds/feeds2.jpg">
+                    </div>
+                    <div class="handle">
+                        <h4>User777</h4>
+                        <p class="text-muted">
+                            @User777
+                        </p>
+                    </div>
+                </a>
                 <div class="sidebar">
                     <a class="menu-item active" href="index.html">
                         <span><i class="uil uil-home"></i></span><h3>Home</h3>
@@ -42,18 +56,27 @@
                         <span><i class="uil uil-bell"><small class="notification-count">10+</small></i></span><h3>Notif</h3>
                         <div class="notifications-popup">
                             <div>
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
                                 <div class="notification-body">
                                     <b>Duong Duong Nguyen</b> replied your post
                                     <small class="text-muted">3 DAYS AGO</small>
                                 </div>
                             </div>
                             <div>
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
                                 <div class="notification-body">
                                     <b>Linh Tank</b> replied your post
                                     <small class="text-muted">2 DAYS AGO</small>
                                 </div>
                             </div>
                             <div>
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
                                 <div class="notification-body">
                                     <b>Phu Nguyen</b> replied your post
                                     <small class="text-muted">3 DAYS AGO</small>
@@ -68,6 +91,196 @@
             </div>
             <!-- Middle --> 
             <div class="middle">
+               <form class="create-post">
+                <div class="profile-photo">
+                    <img src="assets/feeds/feeds2.jpg">
+                </div>
+                    <input type="text" placeholder="What's on your mind?" id="create-post">
+                    <input type="submit" value="Post" class="btn btn-primary">
+               </form>
+               <!-- Feeds -->
+               <div class="feeds">
+                    <!-- Feed 1 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>User123</h3>
+                                    <small>Ho Chi Minh, 1 HOUR AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="assets/feeds/feeds1.jpg">
+                        </div>
+
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span><i class="uil uil-heart"></i></span>
+                                <span><i class="uil uil-comment"></i></span>
+                            </div>
+                            <div class="bookmark">
+                                <span><i class="uil uil-bookmark"></i></span>
+                            </div>
+                        </div>
+                    
+                        <div class="liked-by">
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <p>Liked by <b>User456</b> and <b>200 others</b></p>
+                        </div>
+
+                        <div class="caption">
+                            <p><b>User123</b> Please rate my garden </p>
+                        </div>
+                        <div class="comments text-muted">View all 69 comments</div>
+                    </div>
+                    <!-- End of feed 1 --> 
+
+                    <!-- Feed 2 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>User456</h3>
+                                    <small>Da Lat, 2 HOURS AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="assets/feeds/feeds3.jpg">
+                        </div>
+
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span><i class="uil uil-heart"></i></span>
+                                <span><i class="uil uil-comment"></i></span>
+                            </div>
+                            <div class="bookmark">
+                                <span><i class="uil uil-bookmark"></i></span>
+                            </div>
+                        </div>
+                    
+                        <div class="liked-by">
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <p>Liked by <b>User123</b> and <b>10 others</b></p>
+                        </div>
+
+                        <div class="caption">
+                            <p><b>User456</b> What is wrong with my plant? What needs to be fixed? </p>
+                        </div>
+                        <div class="comments text-muted">View all 9 comments</div>
+                    </div>
+                    <!-- End of feed 2 --> 
+
+                    <!-- Feed 3 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>User789</h3>
+                                    <small>Hai Phong, 9 HOURS AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="assets/feeds/feeds4.jpg">
+                        </div>
+
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span><i class="uil uil-heart"></i></span>
+                                <span><i class="uil uil-comment"></i></span>
+                            </div>
+                            <div class="bookmark">
+                                <span><i class="uil uil-bookmark"></i></span>
+                            </div>
+                        </div>
+                    
+                        <div class="liked-by">
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <p>Liked by <b>User456</b> and <b>20 others</b></p>
+                        </div>
+
+                        <div class="caption">
+                            <p><b>User789</b> Please tell me where to buy this product? Thank you </p>
+                        </div>
+                        <div class="comments text-muted">View all 7 comments</div>
+                    </div>
+                    <!-- End of feed 3 --> 
+
+                    <!-- Feed 4 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="assets/feeds/feeds2.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>User777</h3>
+                                    <small>Ho Chi Minh, 5 HOUR AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="assets/feeds/feeds1.jpg">
+                        </div>
+
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span><i class="uil uil-heart"></i></span>
+                                <span><i class="uil uil-comment"></i></span>
+                            </div>
+                            <div class="bookmark">
+                                <span><i class="uil uil-bookmark"></i></span>
+                            </div>
+                        </div>
+                    
+                        <div class="liked-by">
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <span><img src="assets/feeds/feeds2.jpg"></span>
+                            <p>Liked by <b>User789</b> and <b>111 others</b></p>
+                        </div>
+
+                        <div class="caption">
+                            <p><b>User777</b> My small garden space </p>
+                        </div>
+                        <div class="comments text-muted">View all 50 comments</div>
+                    </div>
+                    <!-- End of feed 4 --> 
+      
+               </div>
                
             </div>
             <!-- Right side -->
