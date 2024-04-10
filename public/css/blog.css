@@ -21,7 +21,7 @@
     --card-border-radius: 1rem;
     --btn-padding: 0.6rem 2rem;
     --search-padding: 0.6rem 1rem;
-    --card-padding: 1rem
+    --card-padding: 1rem;
   
 }
 
@@ -101,7 +101,7 @@ img {
 
 nav {
     width: 100%;
-    background: rgb(100, 248, 77);
+    background: rgb(255, 255, 255);
     padding: 0.7rem 0;
     position: fixed;
     top: 0;
@@ -276,6 +276,7 @@ main .container .left .profile {
     display: block;
 }
 
+
 /* -- Middle -- */
 
 .middle .create-post {
@@ -415,6 +416,10 @@ main .container .right {
     border-color: var(--black);
 }
 
+.right .messages .messages-requests {
+    color: var(--color-primary);
+}
+
 .right .messages .message {
     display: flex;
     gap: 1rem;
@@ -448,4 +453,45 @@ main .container .right {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+/* -- Friend requests -- */
+
+.right .friend-requests {
+    margin-top: 1rem;
+   
+}
+
+.right .friend-requests .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.right .friend-requests i {
+    font-size: 1.4rem;
+}
+
+.right .friend-requests h4 {
+    color: var(--color-gray);
+}
+
+.right .request {
+    background: white;
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-bottom: 0.7rem;
+}
+
+.right .request .info {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.right .request .action {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
