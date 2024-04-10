@@ -37,7 +37,7 @@
 
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: var(--light-color);
+    background: url(https://cdn.dribbble.com/users/405145/screenshots/15025890/media/b5580ed13abe4a098c8036854c706b76.png);
     overflow-x: hidden;
 }
 
@@ -101,7 +101,7 @@ img {
 
 nav {
     width: 100%;
-    background: white;
+    background: rgb(100, 248, 77);
     padding: 0.7rem 0;
     position: fixed;
     top: 0;
@@ -353,4 +353,99 @@ main .container .left .profile {
 
 .middle .liked-by p {
     margin-left: 0.5rem;
+}
+
+/* -- Right side -- */
+
+main .container .right {
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top-right);
+    bottom: 0;
+}
+
+.right .messages {
+    background: white;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+}
+
+.right .messages .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.right .messages i {
+    font-size: 1.4rem;
+}
+
+.right .messages .search-bar {
+    display: flex;
+    margin-bottom: 1rem;
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+}
+
+.right .messages .search-bar input [type="search"] {
+    background: transparent;
+    width: 30vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: var(--black);
+}
+
+.right .messages .category {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.right .messages .category h6 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 4px solid var(--light-color);
+    padding-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.right .messages .category .active {
+    border-color: var(--black);
+}
+
+.right .messages .message {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: start;
+}
+
+.right .message .profile-photo {
+    position: relative;
+    overflow: visible;
+}
+
+.right .profile-photo .img {
+    border-radius: 50%;
+}
+
+.right .messages .message:last-child {
+    margin: 0;
+}
+
+.right .messages .message p {
+    font-size: 0.8rem;
+}
+
+.right .messages .message .profile-photo .active {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    border: 3px solid white;
+    background: rgb(49, 204, 49);
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
