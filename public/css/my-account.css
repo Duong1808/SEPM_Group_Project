@@ -32,10 +32,29 @@ html{
 }
 body{
     background: #eee;
+    margin-top: 20px;
 }
+
+.ui-w-80 {
+    width : 80px !important;
+    height: auto;
+}
+
+.container {
+    background: #eee;
+    width: 540px;
+    height: 450px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    box-shadow: 2px 5px 20px rgba(119, 119, 119, .5);
+}
+
 section{
     padding: 2rem 9%;
 }
+
 .heading{
     text-align: center;
     padding: 2rem 0;
@@ -207,6 +226,11 @@ section{
     color: #0c3822;
     text-decoration: underline;
 }
+
+/* -- Main -- */
+
+
+
 .home{
     display: flex;
     align-items: center;
@@ -243,6 +267,8 @@ section{
     text-align: center;
     box-shadow: var(--box-shadow);
 }
+
+/* -- Main -- */
 
 
 .footer{
