@@ -184,44 +184,171 @@ section{
 .header .search-form label:hover{
     color:rgb(207, 204, 204);
 }
-.header .login-form{
-    position: absolute;
-    top:110%; right: -110%;
-    width: 30rem;
-    box-shadow: var(--box-shadow);
-    padding: 2rem;
-    border-radius: .5rem;
-    background: #fff;
-    text-align: center;
-}
-.header .login-form.active{
-    right: 2rem;
-    transition: .4s linear;
-}
-.header .login-form h3{
-    font-size: 2rem;
-    text-transform: uppercase;
-    color: var(--black);
-}
-.header .login-form .box{
+
+blur{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(5px);
     width: 100%;
-    margin: .7rem 0;
-    background: #eee;
-    border-radius: .5rem;
-    padding: 1rem;
-    font-size: 1.6rem;
-    color: var(--black);
-    text-transform: none;
+    
 }
-.header .login-form p{
-    font-size: 1.4rem;
-    padding: .5rem 0;
-    color: var(--light-color);
+
+.show-popup .form-popup{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%,-50%);
+    transition: transform 0.3s ease, opacity 0.1s;
 
 }
-.header .login-form p a{
-    color: #0c3822;
+.form-popup{
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    background: #fffbbc;
+    border-radius: 3rem;
+    top: 50%;
+    left: 50%;
+    max-width: 720px;
+    width: 100%;
+    background: #f7f5da;
+    transform: translate(-50%,-50%);
+    
+}
+.form-popup .form-box{
+    display: flex;
+}
+.form-box .form-details{
+    border-radius: 3rem;
+    max-width: 330px;
+    display: flex;
+    width: 100%;
+    color: #fff;
+    padding: 0 20px ;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right bottom, #0b4444, #1eefa6 );
+    background-size: cover;
+    background-position: center;
+}
+.login .form-details{
+    background: linear-gradient(to right bottom, #0b4444, #1eefa6 );
+    background-size: cover;
+    background-position: center;
+}
+.signup .form-details{
+    background: linear-gradient(to right bottom, #0b4444, #1eefa6 );
+    background-size: cover;
+    background-position: center;
+}
+.form-box h2{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.form-box .form-content{
+    width: 100%;
+    padding: 35px;
+
+}
+
+.form-box a{
+    color: #106e4d;
+    text-decoration: none;
+}
+.form-box a:hover{
     text-decoration: underline;
+
+}
+.form-box :where(.forgot-password, .policy-text){
+    display: inline-flex;
+    margin-top: 14px;
+    font-size: 0.95rem;
+}
+.form-box .bottom-link{
+    text-align: center;
+}
+.form-popup .signup,
+.form-popup.show-signup .login{
+    display: none;
+}
+.form-popup.show-signup .signup{
+    display: flex;
+}
+
+.signup .policy-text{
+    display: flex;
+    align-items: center;
+}
+.signup .policy-text input{
+    width: 14px;
+    height: 14px;
+    margin-right: 7px;
+}
+
+
+form button{
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 14px 0;
+    border-radius: 3px;
+    margin: 25px 0;
+    color: #fff;
+    cursor: pointer;
+    background: #f06722;
+    transition: 0.2s ease;
+}
+form button:hover{
+    background: #e89146;
+}
+form .input-field{
+    height: 50px;
+    width: 100%; 
+    margin-top: 20px;
+    position: relative;
+}
+form .input-field input{
+    width: 100%;
+    height: 100%;
+    font-size: 0.95rem;
+    outline: none;
+    border-radius: 3px;
+    padding: 0 15px;
+    border: 1px solid #717171;
+}
+.input-field input:is( :focus, :valid) {
+    padding: 16px 15px 0;
+}
+.input-field input:focus{
+    border-color: #14976a;
+}
+form .input-field label{
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    color: #717171;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: 0.2s ease;
+}
+.form-popup .close-btn{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #717171;
+    cursor: pointer;
+}
+.input-field input:is( :focus, :valid) ~ label{
+    transform: translateY(-120%);
+    font-size: 0.75rem;
+    color: var(--light-color);
 }
 
 .ui-w-80 {

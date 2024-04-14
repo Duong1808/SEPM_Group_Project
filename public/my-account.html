@@ -31,19 +31,66 @@
 
         </div>
 
-        <form action="" class="search-form">
-            <input type= "search" id="search-box" placeholder="search">
-            <label for="search-box" class="fas fa-search"></label>
-        </form>
-        <form action="" class ="login-form">
-            <h3>login now</h3>
-            <input type="email" placeholder="Your email" class="box">
-            <input type="password" placeholder="Your password" class="box">
-            <p>Forget your password <a href= "#">click here</a></p>
-            <p>Don't have an account <a href= "#">create now</a></p>
-            <input type="submit" value="login" class="btn">
-    
-        </form>
+        <div class="blur"></div>
+        <div class="form-popup">
+            <span class="close-btn material-symbols-rounded">close</span>
+            <div class="form-box login">
+                <div class="form-details">
+                    <h2>Welcome Back</h2>
+                    <p> Please log in using your personal information to connect with us </p>
+                </div>
+                <div class="form-content">
+                    <h2>LOGIN</h2>
+                    <form action="#">
+                        <div class="input-field">
+                            <input type="email" required>
+                            <label>Email</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <a href="" class="forgot-password">Forgot password?</a>
+                        <button type="submit">Log in</button>
+                    </form>
+                    <div class="bottom-link">
+                        Don't have an account?
+                        <a href="#" id="signup-link">SignUp</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box signup">
+                <div class="form-details">
+                    <h2>Create account</h2>
+                    <p> To become a part of our company, please join us </p>
+                </div>
+                <div class="form-content">
+                    <h2>SINGUP</h2>
+                    <form action="#">
+                        <div class="input-field">
+                            <input type="email">
+                            <label>Enter Your Email</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password">
+                            <label>Create Password</label>
+                        </div>
+                        <div class="policy-text">
+                            <input type="checkbox" class="policy">
+                            <label for="policy">
+                                I agree the 
+                                <a href="#">Terms & Conditions</a>
+                            </label>
+                        </div>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                    <div class="bottom-link">
+                        Already have an account?
+                        <a href="#" id="login-link">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <section class="home" id="home">
@@ -85,15 +132,15 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label class="form-label">Username</label>
-                                        <input type="text" class="form-control mb-1" value="nmaxwell">
+                                        <input type="text" class="form-control mb-1" value="User777">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" value="Nelle Maxwell">
+                                        <input type="text" class="form-control" value="User777">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">E-mail</label>
-                                        <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
+                                        <input type="text" class="form-control mb-1" value="User777@mail.com">
                                         <div class="alert alert-warning mt-3">
                                             Your email is not confirmed. Please check your inbox.<br>
                                             <a href="javascript:void(0)">Resend confirmation</a>
@@ -130,13 +177,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Birthday</label>
-                                        <input type="text" class="form-control" value="May 3, 1995">
+                                        <input type="text" class="form-control" value="Jan 1, 2000">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Country</label>
                                         <select class="custom-select">
                                             <option>USA</option>
-                                            <option selected>Canada</option>
+                                            <option selected>Vietnam</option>
                                             <option>UK</option>
                                             <option>Germany</option>
                                             <option>France</option>

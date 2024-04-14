@@ -5,13 +5,27 @@ document.querySelector('#search-btn').onclick = () =>{
     loginForm.classList.remove('active');
     navbar.classList.remove('active');
 }
-let loginForm = document.querySelector('.login-form');
+const showPopupBtn = document.querySelector("#login-btn");
+const formPopup = document.querySelector(".form-popup");
+const hidePopupBtn = document.querySelector(".form-popup .close-btn");
+const loginSignupLink = document.querySelectorAll(".form-box .bottom-link a");
 
+showPopupBtn.addEventListener("click", () => {
+  document.body.classList.toggle("show-popup")  
+})
+hidePopupBtn.addEventListener("click", () => showPopupBtn.click());
 document.querySelector('#login-btn').onclick = () =>{
-    loginForm.classList.toggle('active');
-    searchForm.classList.remove('active');
-    navbar.classList.remove('active');
+
 }
+loginSignupLink.forEach(link => {
+  link.addEventListener("click",(e) => {
+    e.preventDefault();
+    formPopup.classList[link.id === "signup-link" ? 'add' : 'remove']("show-signup");
+    
+});
+});
+
+
 let navbar = document.querySelector('.navbar');
 
 document.querySelector('#menu-btn').onclick = () =>{
