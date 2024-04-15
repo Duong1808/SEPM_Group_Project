@@ -37,7 +37,7 @@
 
 body {
     font-family: "Montserrat", sans-serif;
-    background: url(https://cdn.dribbble.com/users/405145/screenshots/15025890/media/b5580ed13abe4a098c8036854c706b76.png);
+    background: radial-gradient( rgb(247, 233, 182),#21832c);
     overflow-x: hidden;
 }
 
