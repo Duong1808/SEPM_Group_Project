@@ -21,8 +21,8 @@
                 <input type="search" placeholder="Search Community">
             </div>
             <div class="create">
-                <label class="btn btn-primary" for="create-post">Create</label>
-                <div class="profile-photo">
+                <label class="btn btn-primary" for="create-post" id="crate-lg">Create</label>
+                <div class="profile-photo" id="my-profile-picture">
                     <img src="assets/feeds/feeds2.jpg">
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <!-- Left side -->
             <div class="left">
                 <a class="profile">
-                    <div class="profile-photo">
+                    <div class="profile-photo" id="my-profile-picture">
                         <img src="assets/feeds/feeds2.jpg">
                     </div>
                     <div class="handle">
@@ -118,6 +118,10 @@
                             </div>
                             <span class="edit">
                                 <i class="uil uil-ellipsis-h"></i>
+                                <ul class="edit-menu">
+                                    <li><i class="uil uil-pen"></i>Edit</li>
+                                    <li><i class="uil uil-trash-alt"></i>Delete</li>
+                                </ul>
                             </span>
                         </div>
 
@@ -163,6 +167,10 @@
                             </div>
                             <span class="edit">
                                 <i class="uil uil-ellipsis-h"></i>
+                                <ul class="edit-menu">
+                                    <li><i class="uil uil-pen"></i>Edit</li>
+                                    <li><i class="uil uil-trash-alt"></i>Delete</li>
+                                </ul>
                             </span>
                         </div>
 
@@ -208,6 +216,10 @@
                             </div>
                             <span class="edit">
                                 <i class="uil uil-ellipsis-h"></i>
+                                <ul class="edit-menu">
+                                    <li><i class="uil uil-pen"></i>Edit</li>
+                                    <li><i class="uil uil-trash-alt"></i>Delete</li>
+                                </ul>
                             </span>
                         </div>
 
@@ -253,6 +265,10 @@
                             </div>
                             <span class="edit">
                                 <i class="uil uil-ellipsis-h"></i>
+                                <ul class="edit-menu">
+                                    <li><i class="uil uil-pen"></i>Edit</li>
+                                    <li><i class="uil uil-trash-alt"></i>Delete</li>
+                                </ul>
                             </span>
                         </div>
 
@@ -410,6 +426,47 @@
             </div>
         </div>
     </main>
+
+    <!-- Profile pop-up-->
+    <div class="popup profile-popup">
+        <div>
+            <div class="popup-box profile-popup-box">
+                <h1>User777</h1>
+                <p>@User777</p>
+                <div id="my-profile-picture">
+                    <img src="assets/feeds/feeds2.jpg">
+                </div>
+                <label for="profile-upload" class="btn btn-primary btn-lg">Update Profile Picture</label>
+                <input type="file" accept="image/jpg, image/png, image/jpeg" id="profile-upload">
+                <button class="btn btn-primary btn-lg">Log Out</button>
+            </div>
+            <span class="close"><i class="uil uil-multiply"></i></span>
+        </div>
+    </div>
+
+    <!-- Add post pop-up-->
+    <div class="popup add-post-popup">
+        <div>
+            <form class="popup-box add-post-popup">
+                <h1>Add New Post</h1>
+                <div class="row post-title">
+                    <label>Caption</label>
+                    <input type="text" placeholder="What's on your mind?" id="create-post">
+                </div>
+                <div class="row post-img">
+                    <img src="assets/feeds/feeds6.png" id="postImg">
+                    <label for="feed-pic-upload" class="feed-upload-button">
+                        <span><i class="uil uil-plus"></i></span>
+                        Uoload A Picture
+                    </label>
+                    <input type="file" accept="image/jpg, image/png, image/jpeg" id="feed-pic-upload">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Add Post">
+                </div>
+            </form>
+            <span class="close"><i class="uil uil-multiply"></i></span>
+        </div>
+    </div>
+    
 
 <script src="js/blog.js"></script>
 </body>

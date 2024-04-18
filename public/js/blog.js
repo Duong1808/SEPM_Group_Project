@@ -29,6 +29,33 @@ menuItems.forEach(item => {
     })
 })
 
+// -- Profile popup --
+document.querySelectorAll('#my-profile-picture').forEach(AllProfile => {
+    AllProfile.addEventListener('click', ()=>{
+        document.querySelector('.profile-popup').style.display="flex"
+    })
+})
+
+document.querySelectorAll('.close').forEach(AllCloser=>{
+    AllCloser.addEventListener('click',()=>{
+        document.querySelector('.profile-popup').style.display='none'
+        document.querySelector('.add-post-popup').style.display='none'
+    })
+})
+
+document.querySelector('#profile-upload').addEventListener('change',()=>{
+    document.querySelectorAll('#my-profile-picture img').forEach(AllMyProfileImg=>{
+        AllMyProfileImg.src = URL.createObjectURL(document.querySelector('#profile-upload').files[0])
+    })
+})
+
+// -- Add post popup
+document.querySelector('#crate-lg').addEventListener('click',()=>{
+    document.querySelector('.add-post-popup').style.display='flex'
+})
+document.querySelector('#feed-pic-upload').addEventListener('change',()=>{
+    document.querySelector('#postImg').src = URL.createObjectURL(document.querySelector('#feed-pic-upload').files[0])
+})
 // -- MESSAGES -- 
 
 // Searches chats
