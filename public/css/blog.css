@@ -348,6 +348,18 @@ main .container .left .profile {
     margin: 0.6rem;
 }
 
+.action-buttons span:first-child i {
+    font-weight: normal;
+}
+
+.action-buttons span:nth-child(2) i {
+    font-weight: normal;
+}
+
+.bookmark i {
+    font-weight: normal;
+}
+
 .middle .liked-by {
     display: flex;
 }
@@ -655,6 +667,16 @@ main .container .right {
     font-weight: bold;
  }
 
+
+ .boxshadow {
+    box-shadow: 0 0 1rem var(--color-primary);
+ }
+
+ .liked {
+    font-weight: bold !important;
+    color: var(--color-danger);
+    transform: scale(1.1);
+ }
 /* ------------------------------------------- 
 Media queries for small laptops and big tablets
 ------------------------------------------- */ 

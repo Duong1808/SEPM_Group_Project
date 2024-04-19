@@ -45,17 +45,34 @@ document.querySelectorAll('.close').forEach(AllCloser=>{
 
 document.querySelector('#profile-upload').addEventListener('change',()=>{
     document.querySelectorAll('#my-profile-picture img').forEach(AllMyProfileImg=>{
-        AllMyProfileImg.src = URL.createObjectURL(document.querySelector('#profile-upload').files[0])
+        AllMyProfileImg.src = URL.createObjectURL(document.querySelector('#profile-upload').files[0]);
     })
 })
 
-// -- Add post popup
+// -- Add post popup --
 document.querySelector('#crate-lg').addEventListener('click',()=>{
     document.querySelector('.add-post-popup').style.display='flex'
 })
 document.querySelector('#feed-pic-upload').addEventListener('change',()=>{
     document.querySelector('#postImg').src = URL.createObjectURL(document.querySelector('#feed-pic-upload').files[0])
 })
+
+// -- Highlight post input
+document.querySelector('.mini-button').addEventListener('click',()=>{
+    document.querySelector('.input-post').classList.add('boxshadow')
+})
+
+setTimeout(() => {
+    document.querySelector('.input-post').classList.remove('boxshadow')
+}, 300)
+
+// -- Liked button --
+document.querySelectorAll('.action-buttons span:first-child i').forEach(liked=>{
+    liked.addEventListener('click',()=>{
+       liked.classList.toggle('liked');
+    })
+})
+
 // -- MESSAGES -- 
 
 // Searches chats
