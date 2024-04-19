@@ -319,14 +319,12 @@ main .container .left .profile {
     margin: 1rem 0;
     font-size: 0.85rem;
     line-height: 1.5;
-    position: relative;
 }
 
 .middle .feed .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
 }
 
 .middle .feed .user {
@@ -432,6 +430,7 @@ main .container .right {
     background: white;
     border-radius: var(--card-border-radius);
     padding: var(--card-padding);
+    display: none;
 }
 
 .right .messages .heading {

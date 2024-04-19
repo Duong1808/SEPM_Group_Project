@@ -19,14 +19,14 @@ const changeActiveItem = () => {
 menuItems.forEach(item => {
     item.addEventListener('click', () => {
         changeActiveItem();
-        item.classList.add('active');
-        if(item.id != 'notifications'){
-            document.querySelector('.notifications-popup').style.display = 'none';
-        } else {
-            document.querySelector('.notifications-popup').style.display = 'block';
-            document.querySelector('#notifications .notification-count').style.display = 'none';
-        }
+        item.classList.add('active');    
+        document.querySelector('.notifications-popup').style.display = 'none';
     })
+})
+
+document.querySelector('#notifications').addEventListener('click', ()=>{
+    document.querySelector('.notifications-popup').style.display='block'
+    document.querySelector('#ntCounter1').style.display='none'
 })
 
 // -- Profile popup --
