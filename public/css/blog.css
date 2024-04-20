@@ -37,7 +37,7 @@
 
 body {
     font-family: "Montserrat", sans-serif;
-    background: radial-gradient( rgb(247, 233, 182),#21832c);
+    background: white;
     overflow-x: hidden;
 }
 
@@ -174,7 +174,7 @@ main .container .left {
 
 main .container .left .profile {
     padding: var(--card-padding);
-    background: white;
+    background: var(--light-color);
     border-radius: var(--card-border-radius);
     display: flex;
     align-items: center;
@@ -184,7 +184,7 @@ main .container .left .profile {
 
 .left .sidebar {
     margin-top: 1rem;
-    background: white;
+    background: var(--light-color);
     border-radius: var(--card-border-radius);
 }
 
@@ -296,7 +296,7 @@ main .container .left .profile {
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
-    background: white;
+    background: var(--light-color) ;
     padding: 0.4rem var(--card-padding);
     border-radius: var(--border-radius);
 }
@@ -313,7 +313,7 @@ main .container .left .profile {
 /* -- Feeds -- */
 
 .middle .feeds .feed {
-    background: white;
+    background: var(--light-color);
     border-radius: var(--card-border-radius);
     padding: var(--card-padding);
     margin: 1rem 0;
@@ -540,7 +540,7 @@ main .container .right {
 }
 
 .right .request {
-    background: white;
+    background: var(--light-color);
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
     margin-bottom: 0.7rem;
