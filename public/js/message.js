@@ -59,4 +59,12 @@ document.querySelectorAll('.conversation-back').forEach(function(item) {
         document.querySelector('.conversation-default').classList.add('active')
     })
 })
+
+const messages = document.querySelector('.messages');
+const message = messages.querySelectorAll('.message');
+const messageSearch = document.querySelector('#message-search');
+
+
 // end: Coversation
+
+
