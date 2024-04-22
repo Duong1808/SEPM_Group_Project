@@ -951,3 +951,107 @@ form:where(input, textarea, select)::placeholder{
 
 /*----------------------------------------*/
 
+/*-- Plant category --*/
+
+/* -- Breadcrumb -- */ 
+
+.breadcrumb {
+    font-size: var(--font-small);
+    margin-bottom: 2em;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: '/';
+    padding: 0 0.35em;
+}
+
+.breadcrumb li:last-child {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--light-text-color);
+}
+
+.flexitem {
+    display: flex;
+    align-items: center;
+}
+
+.category-content .button {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.category-content :where(.sorter){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-content .sorter {
+    margin: 0 0 30px;
+}
+
+.category-content .sorter > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 44px;
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    border-radius: 50%;
+    position: fixed;
+    top: calc(50% - 20px);
+    left: 0;
+    z-index: 10;
+    opacity: .5;
+    transition: opacity .3s, var(--transition-transform);
+}
+
+.category-content .sorter > a:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.category-content .opt-trigger {
+    gap: 5px;
+    margin-right: 15px;
+    line-height: 1.4;
+}
+
+.category-content .opt-trigger span {
+    font-size: var(--fs14);
+    font-weight: var(--fw600);
+}
+
+.category-content .opt-trigger i {
+    font-size: 24px;
+}
+
+.category-content .list-inline a {
+    display: flex;
+    padding: 7px;
+    background-color: var(--flashwhite-color);
+    margin-left: 10px;
+    border-radius: 3px;
+}
+
+.category-content .left .span {
+    display: none;
+}
+
+.category-content .dotgrid .dot-image{
+    position: relative;
+    margin-bottom: 15px;
+    margin-left: 30px;
+    overflow: hidden;
+    width: 300px;
+    height: 350px;
+}
+
+.category-content .dotgrid .wrapper {
+    --grid-col: 221px;
+}

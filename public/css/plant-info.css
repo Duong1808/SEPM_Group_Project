@@ -944,6 +944,10 @@ form:where(input, textarea, select)::placeholder{
     .add-products .checkout .item {
         flex: 0 0 100%;
     }
+
+    .category-content .left .span {
+        display: block;
+    }
 }
 
 /* ------------
@@ -1639,7 +1643,11 @@ form:where(input, textarea, select)::placeholder{
 
 
 @media (min-width: 992px) {
-    .menu-trigger {
+    .menu-trigger, .category-content .sorter >a {
+        display: none;
+    }
+
+    .category-content .sorter > a {
         display: none;
     }
 
@@ -1735,9 +1743,16 @@ form:where(input, textarea, select)::placeholder{
         grid-template-columns: 1fr 1fr;
     }
 }
+
+.page-category .content {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 60px
+}
+
 }
 
 
 
-/*----------------------------------------*/
+
 

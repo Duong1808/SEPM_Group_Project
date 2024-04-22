@@ -521,6 +521,7 @@ main .container .right {
 
 .right .friend-requests {
     margin-top: 1rem;
+    display: none;
    
 }
 
