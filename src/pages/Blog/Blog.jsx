@@ -126,9 +126,7 @@ function Blog() {
           <h2 className="log">
             <Link to="/" className="logo">
               {" "}
-              <i className="fas fa-tree">
-                <FaTree />
-              </i>{" "}
+              {" "}
               BloomBuddy{" "}
             </Link>
           </h2>

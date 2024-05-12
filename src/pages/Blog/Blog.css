@@ -3,10 +3,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 :root {
+  --primary-font: 'Montserrat', sans-serif;
+  --second-font: 'Prata', serif;
   --organge: #ff7800;
   --black: #130f40;
   --light-color: rgb(240, 239, 239);
-  --color-primary: #ff7800;
+  --color-primary: #aff5bc;
   --color-danger: rgb(234, 51, 51);
   --color-gray: hs1(252, 75%, 65%);
   --box-shadow: 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
@@ -24,12 +26,14 @@
 }
 
 .blog nav .logo {
-  font-size: 2rem;
-  font-weight: bolder;
-  color: var(--black);
+  font-family: var(--second-font);
+  font-size: 30px;
+  line-height: inherit;
+  pointer-events: auto;
 }
+
 .blog nav .logo i {
-  color: #0c3939;
+  color: var(--color-primary);
 }
 
 .blog .container {
