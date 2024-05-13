@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -39,5 +40,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+=======
+  "dependencies": {
+    "lightgallery": "^2.7.2"
+>>>>>>> Stashed changes
   }
 }
