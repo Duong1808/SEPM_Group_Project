@@ -5,7 +5,14 @@ import { FaBell, FaHome, FaPlus, FaSearch, FaTree } from "react-icons/fa";
 import { RiArrowLeftSLine, RiCloseLine, RiSettings2Fill } from "react-icons/ri";
 import BlogFeed from "../../components/BlogFeed/BlogFeed";
 import { isAuthenticated } from "../../services/auth";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
@@ -20,6 +27,74 @@ function Blog() {
   const [postStep, setPostStep] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreatorOpen, setIsCreatorOpen] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchedPostIds, setSearchedPostIds] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [isOpenNoti, setIsOpenNoti] = useState(false);
+
+  const toggleOpenNoti = () => {
+    setIsOpenNoti(!isOpenNoti);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault();
+
+    const normalizedKeyword = normalizeKeyword(searchKeyword);
+
+    if (!normalizedKeyword) {
+      setSearchedPostIds([]);
+      return;
+    }
+
+    try {
+      const db = getFirestore();
+      const postsRef = collection(db, "posts");
+
+      const querySnapshot = await getDocs(postsRef);
+      const foundPostIds = [];
+
+      querySnapshot.forEach((doc) => {
+        const postData = doc.data();
+        const normalizedContent = normalizeKeyword(postData.content);
+
+        if (normalizedContent.includes(normalizedKeyword)) {
+          foundPostIds.push(doc.id);
+        }
+      });
+
+      setSearchedPostIds(foundPostIds);
+    } catch (error) {
+      console.error("Error searching posts:", error);
+    }
+  };
+
+  const normalizeKeyword = (keyword) => {
+    if (!keyword) return "";
+    return keyword
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  };
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      const db = getFirestore();
+      const notiRef = collection(db, "notifications");
+      const q = query(notiRef, orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
+      const notiList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNotifications(notiList);
+    };
+
+    fetchNotifications();
+  }, []);
 
   useEffect(() => {
     const isAuth = isAuthenticated();
@@ -83,7 +158,6 @@ function Blog() {
     try {
       const currentTime = Timestamp.now();
 
-      // Lưu trữ hình ảnh vào Firebase Storage
       let imageUrl = "";
       if (postImage) {
         const storage = getStorage();
@@ -95,19 +169,26 @@ function Blog() {
         imageUrl = await getDownloadURL(storageRef);
       }
 
-      // Thêm dữ liệu vào Firestore
       const db = getFirestore();
       const postsRef = collection(db, "posts");
-      await addDoc(postsRef, {
+      const postDocRef = await addDoc(postsRef, {
         userId: authUser.uid,
         content: postCaption,
-        imageUrl: imageUrl, // URL của hình ảnh
+        imageUrl: imageUrl,
         createdAt: currentTime,
         likes: 0,
         comments: 0,
       });
 
-      // Đặt lại trạng thái của các biến sau khi đăng thành công
+      const notificationsRef = collection(db, "notifications");
+      await addDoc(notificationsRef, {
+        postId: postDocRef.id,
+        postContent: postCaption,
+        posterId: authUser.uid,
+        posterName: userData.name,
+        createdAt: currentTime,
+      });
+
       setPostCaption("");
       setPostImage(null);
       setImagePreview("");
@@ -115,7 +196,7 @@ function Blog() {
       setIsCreatorOpen(false);
       setPostStep(1);
     } catch (error) {
-      console.error("Error adding post: ", error);
+      console.error("Error adding post or creating notifications: ", error);
     }
   };
 
@@ -126,7 +207,9 @@ function Blog() {
           <h2 className="log">
             <Link to="/" className="logo">
               {" "}
-              {" "}
+              <i className="fas fa-tree">
+                <FaTree />
+              </i>{" "}
               BloomBuddy{" "}
             </Link>
           </h2>
@@ -134,16 +217,21 @@ function Blog() {
             <i className="uil uil-search">
               <FaSearch />
             </i>
-            <input type="search" placeholder="Search Community" />
+            <input
+              type="search"
+              placeholder="Search Community"
+              value={searchKeyword}
+              onChange={handleSearchChange}
+            />
           </div>
           <div className="create">
-            <label
-              className="btn btn-primary mini-button"
-              for="create-post"
-              id="crate-lg"
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleSearchSubmit}
             >
-              Create
-            </label>
+              Search
+            </button>
             <div className="profile-photo" id="my-profile-picture">
               <img alt="" src="assets/feeds/feeds2.jpg" />
             </div>
@@ -171,7 +259,11 @@ function Blog() {
                 </span>
                 <h3>Home</h3>
               </Link>
-              <Link className="menu-item" id="notifications">
+              <Link
+                className="menu-item"
+                id="notifications"
+                onClick={toggleOpenNoti}
+              >
                 <span>
                   <i className="uil uil-bell">
                     <FaBell />
@@ -181,34 +273,24 @@ function Blog() {
                   </i>
                 </span>
                 <h3>Notification</h3>
-                <div className="notifications-popup">
-                  <div>
-                    <div className="profile-photo">
-                      <img alt="" src="assets/feeds/feeds2.jpg" />
+                <div
+                  className="notifications-popup"
+                  style={{ display: isOpenNoti ? "block" : "none" }}
+                >
+                  {notifications.map((notification) => (
+                    <div key={notification.id}>
+                      <div className="notification-body">
+                        <b>{notification.posterName}</b> posted:{" "}
+                        {notification.postContent}
+                        <br />
+                        <small className="text-muted">
+                          {new Date(
+                            notification.createdAt.seconds * 1000
+                          ).toLocaleString()}
+                        </small>
+                      </div>
                     </div>
-                    <div className="notification-body">
-                      <b>Duong Duong Nguyen</b> replied your post
-                      <small className="text-muted">3 DAYS AGO</small>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="profile-photo">
-                      <img alt="" src="assets/feeds/feeds2.jpg" />
-                    </div>
-                    <div className="notification-body">
-                      <b>Linh Tank</b> replied your post
-                      <small className="text-muted">2 DAYS AGO</small>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="profile-photo">
-                      <img alt="" src="assets/feeds/feeds2.jpg" />
-                    </div>
-                    <div className="notification-body">
-                      <b>Phu Nguyen</b> replied your post
-                      <small className="text-muted">3 DAYS AGO</small>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </Link>
 
@@ -236,7 +318,13 @@ function Blog() {
               <div className="create-post-heading">What's on your mind?</div>
             </form>
             <div className="feeds">
-              <BlogFeed />
+              {searchedPostIds.length > 0 ? (
+                searchedPostIds.map((postId) => (
+                  <BlogFeed key={postId} postId={postId} />
+                ))
+              ) : (
+                <BlogFeed />
+              )}
             </div>
           </div>
         </div>

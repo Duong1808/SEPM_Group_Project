@@ -3,12 +3,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 :root {
-  --primary-font: 'Montserrat', sans-serif;
-  --second-font: 'Prata', serif;
   --organge: #ff7800;
   --black: #130f40;
   --light-color: rgb(240, 239, 239);
-  --color-primary: #aff5bc;
+  --color-primary: #ff7800;
   --color-danger: rgb(234, 51, 51);
   --color-gray: hs1(252, 75%, 65%);
   --box-shadow: 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
@@ -26,14 +24,12 @@
 }
 
 .blog nav .logo {
-  font-family: var(--second-font);
-  font-size: 30px;
-  line-height: inherit;
-  pointer-events: auto;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: var(--black);
 }
-
 .blog nav .logo i {
-  color: var(--color-primary);
+  color: #0c3939;
 }
 
 .blog .container {
@@ -159,6 +155,7 @@
   height: max-content;
   position: sticky;
   top: var(--sticky-top-left);
+  z-index: 9;
 }
 
 .blog main .container .left .profile {
@@ -244,17 +241,18 @@
 
 .blog .left .notifications-popup {
   position: absolute;
-  top: 0;
+  top: -100%;
   left: 110%;
   width: 30rem;
-  background: white;
+  background: #555;
+  color: white;
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
   box-shadow: 0 0 2rem hs1(var(--color-primary), 75%, 60% 25%);
-  z-index: 8;
-  display: none;
+  z-index: 20;
+  /* display: none; */
 }
-
+/* 
 .blog .left .notifications-popup::before {
   content: "";
   width: 1.2rem;
@@ -264,7 +262,7 @@
   position: absolute;
   left: -0.6rem;
   transform: rotate(45deg);
-}
+} */
 
 .blog .left .notifications-popup > div {
   display: flex;
@@ -312,6 +310,7 @@
   margin: 1rem 0;
   font-size: 0.85rem;
   line-height: 1.5;
+  position: relative;
 }
 
 .blog .middle .feed .head {
@@ -400,6 +399,7 @@
   font-size: 1rem;
   color: rgb(150, 150, 150);
   transition: 300ms ease all;
+  cursor: pointer;
 }
 
 .blog .edit .edit-menu li:hover {
@@ -722,7 +722,7 @@
 
   /* -- Notification popup -- */
 
-  .blog .left .notifications-popup {
+  /* .blog .left .notifications-popup {
     position: absolute;
     left: -20rem;
     width: 20rem;
@@ -733,7 +733,7 @@
     top: 1.3rem;
     left: calc(20rem - 0.6rem);
     display: block;
-  }
+  } */
 
   .blog main .container .middle {
     grid-column: 1/3;
@@ -826,4 +826,29 @@
 .blog .interaction-buttons span i {
   padding: 0 5px;
   cursor: pointer;
+}
+
+.blog .add-comment {
+  display: flex;
+  margin-top: 20px;
+}
+.blog .add-comment input {
+  width: 90%;
+  background-color: #fff;
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+}
+.blog .add-comment button {
+  width: 10%;
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius);
+  color: #fff;
+  cursor: pointer;
+}
+.blog .comments {
+  border-top: 1px solid #ccc;
+}
+.blog .comment {
+  margin: 5px 0;
+  padding: 10px 0;
 }

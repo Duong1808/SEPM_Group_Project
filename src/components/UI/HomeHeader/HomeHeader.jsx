@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   RiArrowDownSLine,
@@ -8,10 +8,12 @@ import {
   RiUser3Line,
 } from "react-icons/ri";
 import HomeMobileMenu from "../HomeMobileMenu/HomeMobileMenu";
+import { auth } from "../../../services/firebase";
 
 function HomeHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -19,6 +21,14 @@ function HomeHeader() {
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <header>
@@ -35,11 +45,17 @@ function HomeHeader() {
               </div>
               <div className="list-inline">
                 <ul>
-                  <li>
-                    <Link to="/account">
-                      <RiUser3Line />
-                    </Link>
-                  </li>
+                  {user ? (
+                    <li>
+                      <Link to="/account">
+                        <RiUser3Line />
+                      </Link>
+                    </li>
+                  ) : (
+                    <li>
+                      <Link to="/login">Login</Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

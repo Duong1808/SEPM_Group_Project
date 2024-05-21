@@ -10,7 +10,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutAuthenticated } from "../../services/auth";
 
 function MyAccount() {
@@ -18,6 +18,7 @@ function MyAccount() {
   const [userData, setUserData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeTab, setActiveTab] = useState("account-general");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,6 +42,7 @@ function MyAccount() {
       } else {
         setAuthUser(null);
         setUserData(null);
+        navigate("/login");
       }
     });
 
@@ -49,7 +51,7 @@ function MyAccount() {
     return () => {
       unsubscribe();
     };
-  }, [authUser]);
+  }, [authUser, navigate]);
 
   const onImageChange = (event) => {
     if (event.target.files[0]) {
@@ -91,7 +93,7 @@ function MyAccount() {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        // Đăng xuất thành công
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error signing out:", error);
@@ -327,7 +329,7 @@ function MyAccount() {
                 </div>
               </div>
             </div>
-            <div className="text-right mt-3">
+            <div className="buttons-area">
               <button
                 type="button"
                 className="btn btn-primary"
@@ -341,7 +343,7 @@ function MyAccount() {
                 className="btn btn-default"
                 onClick={handleLogout}
               >
-                Cancel
+                Log out
               </button>
             </div>
           </div>

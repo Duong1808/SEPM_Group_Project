@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   getFirestore,
@@ -9,6 +9,9 @@ import {
   updateDoc,
   setDoc,
   deleteDoc,
+  addDoc,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import {
   FaEllipsisH,
@@ -20,9 +23,104 @@ import {
   FaTrash,
 } from "react-icons/fa";
 
-function BlogFeed() {
+function BlogFeed({ postId }) {
   const [posts, setPosts] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [comments, setComments] = useState({});
+  const [newComment, setNewComment] = useState({});
+
+  const fetchComments = useCallback(async (postId) => {
+    try {
+      const db = getFirestore();
+      const commentsCollection = collection(db, "posts", postId, "comments");
+      const commentsQuery = query(
+        commentsCollection,
+        orderBy("createdAt", "asc")
+      );
+      const commentsSnapshot = await getDocs(commentsQuery);
+      const commentsData = await Promise.all(
+        commentsSnapshot.docs.map(async (commentDoc) => {
+          const commentData = commentDoc.data();
+          const userDoc = doc(db, "users", commentData.userId);
+          const userSnap = await getDoc(userDoc);
+          const userData = userSnap.data();
+          return {
+            id: commentDoc.id,
+            ...commentData,
+            user: userData,
+          };
+        })
+      );
+      setComments((prevComments) => ({
+        ...prevComments,
+        [postId]: commentsData,
+      }));
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  }, []);
+
+  const fetchPosts = useCallback(async () => {
+    try {
+      const db = getFirestore();
+      let postsData = [];
+
+      if (postId) {
+        const postRef = doc(db, "posts", postId);
+        const postSnap = await getDoc(postRef);
+
+        if (postSnap.exists()) {
+          const postData = postSnap.data();
+          const userDoc = doc(db, "users", postData.userId);
+          const userSnap = await getDoc(userDoc);
+          const userData = userSnap.data();
+
+          const likeRef = doc(db, "likes", `${userId}_${postId}`);
+          const likeDoc = await getDoc(likeRef);
+          const isLiked = likeDoc.exists();
+
+          await fetchComments(postId);
+
+          postsData = [
+            {
+              id: postId,
+              user: userData,
+              isLiked: isLiked,
+              ...postData,
+            },
+          ];
+        }
+      } else {
+        const postsCollection = collection(db, "posts");
+        const postsSnapshot = await getDocs(postsCollection);
+        postsData = await Promise.all(
+          postsSnapshot.docs.map(async (postDoc) => {
+            const postData = postDoc.data();
+            const userDoc = doc(db, "users", postData.userId);
+            const userSnap = await getDoc(userDoc);
+            const userData = userSnap.data();
+
+            const likeRef = doc(db, "likes", `${userId}_${postDoc.id}`);
+            const likeDoc = await getDoc(likeRef);
+            const isLiked = likeDoc.exists();
+
+            await fetchComments(postDoc.id);
+
+            return {
+              id: postDoc.id,
+              user: userData,
+              isLiked: isLiked,
+              ...postData,
+            };
+          })
+        );
+      }
+
+      setPosts(postsData);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  }, [userId, fetchComments, postId]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -37,32 +135,10 @@ function BlogFeed() {
   }, []);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const db = getFirestore();
-        const postsCollection = collection(db, "posts");
-        const postsSnapshot = await getDocs(postsCollection);
-        const postsData = await Promise.all(
-          postsSnapshot.docs.map(async (postDoc) => {
-            const postData = postDoc.data();
-            const userDoc = doc(db, "users", postData.userId);
-            const userSnap = await getDoc(userDoc);
-            const userData = userSnap.data();
-            return {
-              id: postDoc.id,
-              user: userData,
-              ...postData,
-            };
-          })
-        );
-        setPosts(postsData);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, [userId]);
+    if (userId) {
+      fetchPosts();
+    }
+  }, [userId, fetchPosts]);
 
   const handleLikePost = async (postId) => {
     try {
@@ -80,6 +156,7 @@ function BlogFeed() {
         if (!likeDoc.exists()) {
           await updateDoc(postRef, { likes: currentLikes + 1 });
           await setDoc(likeRef, { userId, postId });
+          fetchPosts();
         }
       } else {
         console.error("Error: Post does not exist");
@@ -105,6 +182,8 @@ function BlogFeed() {
         if (likeDoc.exists()) {
           await updateDoc(postRef, { likes: currentLikes - 1 });
           await deleteDoc(likeRef);
+          fetchPosts();
+          window.location.reload();
         }
       } else {
         console.error("Error: Post does not exist");
@@ -112,6 +191,47 @@ function BlogFeed() {
     } catch (error) {
       console.error("Error unliking post:", error);
     }
+  };
+
+  const handleDeletePost = async (postId, postUserId) => {
+    try {
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+      if (currentUser && currentUser.uid === postUserId) {
+        const db = getFirestore();
+        const postRef = doc(db, "posts", postId);
+        await deleteDoc(postRef);
+        fetchPosts();
+      } else {
+        console.log("Bạn không có quyền xóa bài đăng này.");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
+  const handleAddComment = async (postId) => {
+    try {
+      const db = getFirestore();
+      const commentRef = collection(db, "posts", postId, "comments");
+      const newCommentData = {
+        userId: userId,
+        content: newComment[postId],
+        createdAt: new Date(),
+      };
+      await addDoc(commentRef, newCommentData);
+      setNewComment((prev) => ({ ...prev, [postId]: "" }));
+      fetchComments(postId);
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
+
+  const handleCommentChange = (postId, content) => {
+    setNewComment((prev) => ({
+      ...prev,
+      [postId]: content,
+    }));
   };
 
   return (
@@ -143,7 +263,7 @@ function BlogFeed() {
                   </i>
                   Edit
                 </li>
-                <li>
+                <li onClick={() => handleDeletePost(post.id, post.userId)}>
                   <i className="uil uil-trash-alt">
                     <FaTrash />
                   </i>
@@ -192,8 +312,21 @@ function BlogFeed() {
               <b>{post.user.name}</b> {post.content}{" "}
             </p>
           </div>
-          <div className="comments text-muted">
-            View all {post.commentsCount} comments
+          <div className="comments">
+            {comments[post.id]?.map((comment) => (
+              <div key={comment.id} className="comment">
+                <b>{comment.user.name}</b> {comment.content}
+              </div>
+            ))}
+            <div className="add-comment">
+              <input
+                type="text"
+                placeholder="Add a comment..."
+                value={newComment[post.id] || ""}
+                onChange={(e) => handleCommentChange(post.id, e.target.value)}
+              />
+              <button onClick={() => handleAddComment(post.id)}>Post</button>
+            </div>
           </div>
         </div>
       ))}
